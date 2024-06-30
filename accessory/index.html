@@ -3,11 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Car Accessories </title>
+    <title>Car Accessories</title>
     <link rel="stylesheet" href="./css/global.css">
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
-    <script src="main.js"></script>
-    
+    <script>
+        $(document).ready(function() {
+            var totalPrice = 0;
+
+            function addProductList() {
+                var accessoryId = $("#accessory").val();
+                var accessoryName = $("#accessory option:selected").text();
+                var amount = parseInt($("#amount").val());
+                var itemPrice = getPrice(accessoryId) * amount;
+                var newRow = $("<tr>");
+                newRow.append("<td>" + accessoryId + "</td>");
+                newRow.append("<td>" + accessoryName + "</td>");
+                newRow.append("<td>" + amount + "</td>");
+                newRow.append("<td>" + itemPrice.toFixed(2) + " $</td>");
+                
+                $("#product_list").append(newRow);
+
+                totalPrice += itemPrice;
+                $("#netPrice").text(totalPrice.toFixed(2));
+            }
+
+            function getPrice(accessoryId) {
+                // Here you can define the price for each accessory ID
+                var prices = {
+                    "CC01": 100,
+                    "DC01": 200,
+                    "PM03": 30,
+                    "TO06": 40,
+                    "CV04": 50,
+                    "HH07": 20,
+                    "CTC05": 15
+                };
+                return prices[accessoryId] || 0;
+            }
+
+            function calculateVAT() {
+                var vatPercentage = parseFloat($("#vat").val());
+                var vatPrice = totalPrice * (vatPercentage / 100);
+                var netPrice = totalPrice + vatPrice;
+                $("#totalPrice").text(netPrice.toFixed(2));
+            }
+
+            window.addProductList = addProductList;
+            window.calculateVAT = calculateVAT;
+        });
+    </script>
 </head>
 <body>
     <h1>Car Accessories</h1>
@@ -38,7 +82,6 @@
         </tr>
     </table>
     <p class="net">Net Price: $ <span id="netPrice">0</span></p>
-    <script src="main.js"></script>
     <label for="vat">VAT %:</label>
     <input type="number" name="vat" id="vat" value="7" min="0">
     <button onclick="calculateVAT()">Total Price</button>
