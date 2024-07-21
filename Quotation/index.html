@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Accessories</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+        integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-5">
+                <h2 class="text-danger">Car Parts & Accessories Shop</h2>
+                <p>
+                    123 Auto Drive
+                    <br>New City, State
+                    <br>Country
+                    <br>Postal Code
+                    <br>
+                    <br>
+
+                    <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>
+                    : 0612367892
+
+                    <br>
+                    <span class="glyphicon glyphicon-phone" aria-hidden="true"></span>
+                    : 0632167892
+                </p>
+            </div>
+            <div class="col-sm-4"></div>
+            <div class="col-sm-3 text-center">
+                <h1 class="text-danger">
+                    QUOTATION
+                </h1>
+                <img src="./skull.avif" class="img-circle" style="width:100px;height:100px;">
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4">
+                <h3>Customer:</h3>
+                <b>Mr. John Doe</b><br>
+                123 Main Street<br>
+                Big City, State<br>
+                Country
+            </div>
+            <div class="col-sm-4">
+                <h3>Ship to:</h3>
+                <b>Mr. Jane Smith</b><br>
+                456 Elm Street<br>
+                Small Town, State<br>
+                Country
+            </div>
+            <div class="col-sm-4">
+                <h4 id="quotationDate">
+                    Date: 21-07-2024
+                </h4>
+            </div>
+        </div>
+    </div>
+
+    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">Add Item</button>
+
+    <table class="table table-bordered table-condensed" id="quotationTable">
+        <thead>
+            <tr>
+                <th class="text-center">Quantity</th>
+                <th class="text-center">Description</th>
+                <th class="text-center">Unit Price</th>
+                <th class="text-center">Amount</th>
+                <th class="text-center">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+
+        <tfoot>
+            <tr id="sub-total">
+                <td colspan="3" class="text-right">Subtotal</td>
+                <td colspan="2" class="text-right" id="subTotal">---</td>
+            </tr>
+            <tr>
+                <td colspan="3" class="text-right">VAT (7%)</td>
+                <td colspan="2" class="text-right" id="vat">--</td>
+            </tr>
+            <tr>
+                <td colspan="3" class="text-right">Shipping & Handling</td>
+                <td colspan="2" class="text-right" id="bottom-line">0.00</td>
+            </tr>
+            <tr>
+                <td colspan="3" class="text-right">Total Due</td>
+                <td colspan="2" class="text-right" id="total">--</td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <br>
+
+    <p class="text-center">
+        <b>Make all checks payable to:</b>
+        <br><i>Car Parts & Accessories Shop</i>
+        <br><b>If you have any questions concerning this invoice, call: 0612367892</b>
+        <br>
+        <br><b>THANK YOU FOR YOUR BUSINESS</b>
+    </p>
+
+    <footer>By Arkar Phyo</footer>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title" id="exampleModalLabel">Add Item</h2>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table class="table">
+                        <tr>
+                            <td>Description</td>
+                            <td>
+                                <select name="accessory" id="newItemDescription" onchange="updatePrice()">
+                                    <option value="Car Cover">Car Cover</option>
+                                    <option value="Dashboard Camera">Dashboard Camera</option>
+                                    <option value="Phone Mount">Phone Mount</option>
+                                    <option value="Trunk Organizer">Trunk Organizer</option>
+                                    <option value="Car Vacuum">Car Vacuum</option>
+                                    <option value="Headrest Hooks">Headrest Hooks</option>
+                                    <option value="Car Trash Can">Car Trash Can</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Price Per Unit</td>
+                            <td><input type="number" min="0" id="newItemPPU" readonly></td>
+                        </tr>
+                        <tr>
+                            <td>Quantity</td>
+                            <td><input type="number" min="0" id="newItemQty"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="addItem()">Save New Item</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+        integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
+        crossorigin="anonymous"></script>
+    <script>
+        var quotationData = [];
+
+        function addItem() {
+            var description = $("#newItemDescription").val();
+            var unitPrice = parseFloat($("#newItemPPU").val());
+            var quantity = parseFloat($("#newItemQty").val());
+
+            if (isNaN(unitPrice) || isNaN(quantity)) {
+                alert("Please enter valid price and quantity.");
+                return;
+            }
+
+            var newItem = {
+                description: description,
+                unitPrice: unitPrice,
+                quantity: quantity
+            };
+
+            quotationData.push(newItem);
+            $('#exampleModal').modal('hide');
+            renderTable();
+        }
+
+        function renderTable() {
+            var subTotal = 0;
+            var vatRate = 0.07;
+
+            // Clear existing rows
+            $('#quotationTable tbody').empty();
+
+            // Populate table rows
+            quotationData.forEach(function (item) {
+                var amount = item.quantity * item.unitPrice;
+                subTotal += amount;
+
+                var row = '<tr>' +
+                    '<td>' + item.quantity + '</td>' +
+                    '<td>' + item.description + '</td>' +
+                    '<td>' + item.unitPrice.toFixed(2) + '</td>' +
+                    '<td>' + amount.toFixed(2) + '</td>' +
+                    '<td><button class="btn btn-danger btn-sm" onclick="deleteItem(' + quotationData.indexOf(item) + ')">Delete</button></td>' +
+                    '</tr>';
+
+                $('#quotationTable tbody').append(row);
+            });
+
+            var vat = (subTotal * vatRate).toFixed(2);
+            var totalDue = subTotal + parseFloat(vat);
+
+            $('#subTotal').text(subTotal.toFixed(2));
+            $('#vat').text(vat);
+            $('#total').text(totalDue.toFixed(2));
+        }
+
+        function updatePrice() {
+            var itemDescription = $("#newItemDescription").val();
+            var itemPrice = price(itemDescription);
+            $("#newItemPPU").val(itemPrice);
+        }
+
+        function price(itemDescription) {
+            switch (itemDescription) {
+                case "Car Cover":
+                    return 1300;
+                case "Dashboard Camera":
+                    return 2350;
+                case "Phone Mount":
+                    return 240;
+                case "Trunk Organizer":
+                    return 820;
+                case "Car Vacuum":
+                    return 1200;
+                case "Headrest Hooks":
+                    return 50;
+                case "Car Trash Can":
+                    return 95;
+                default:
+                    return 0;
+            }
+        }
+
+        function deleteItem(index) {
+            quotationData.splice(index, 1);
+            renderTable();
+        }
+
+        $(document).ready(function () {
+            $('#exampleModal').on('shown.bs.modal', function () {
+                $('#newItemDescription').trigger('change');
+            });
+        });
+    </script>
+</body>
+</html>
